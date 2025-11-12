@@ -14,6 +14,7 @@ import Profile from './Components/Profile.jsx';
 import UpdateProfile from './Components/UpdateProfile.jsx';
 import AddBook from './Components/AddBook.jsx';
 import BookDetails from './Components/BookDetails.jsx';
+import MyBooks from './Components/MyBooks.jsx';
 
 
 
@@ -53,7 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/books/:id",
         element: <BookDetails></BookDetails>,
-        // loader: ({params}) => fetch(`http://localhost:3000/books/${params.id}`)
+      },
+      {
+        path: "/my-books",
+        element: <MyBooks></MyBooks>,
       },
     ]
   },
