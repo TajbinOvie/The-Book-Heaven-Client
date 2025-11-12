@@ -16,6 +16,7 @@ import AddBook from './Components/AddBook.jsx';
 import BookDetails from './Components/BookDetails.jsx';
 import MyBooks from './Components/MyBooks.jsx';
 import UpdateBook from './Components/UpdateBook.jsx';
+import ErrorPage from './Components/ErrorPage.jsx';
 
 
 
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/my-books",
         element: <MyBooks></MyBooks>,
+      },
+      {
+        path: "/*",
+        element: <ErrorPage></ErrorPage>
       },
     ]
   },

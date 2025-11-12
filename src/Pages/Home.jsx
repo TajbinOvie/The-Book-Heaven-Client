@@ -3,6 +3,8 @@ import HeroBanner from '../Components/HeroBanner';
 import LatestBooks from '../Components/LatestBooks';
 import axios from 'axios';
 import LoadingSpinner from '../Components/LoadingSpinner';
+import TopGenre from '../Components/TopGenre';
+import BookOfTheWeek from '../Components/BookOfTheWeek';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -36,6 +38,8 @@ const Home = () => {
     <div>
       <HeroBanner books={books} />
       <LatestBooks latestBooks={latestBooks} />
+      <TopGenre></TopGenre>
+      <BookOfTheWeek></BookOfTheWeek>
     </div>
   );
 };
