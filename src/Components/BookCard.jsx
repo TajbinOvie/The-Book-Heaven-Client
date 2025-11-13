@@ -58,7 +58,7 @@ const BookCard = ({ book }) => {
         {/* Hidden button appears on hover */}
         <Link
           to={`/books/${book._id}`}
-          className="opacity-0 group-hover:opacity-100 mt-3 inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition-opacity duration-300"
+          className="opacity-0 group-hover:opacity-100 mt-3 inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition-opacity duration-300 text-center"
         >
           View Details
         </Link>

@@ -4,6 +4,10 @@ import { useParams } from "react-router";
 import LoadingSpinner from "./LoadingSpinner";
 import { AuthContext } from "../Provider/AuthContext";
 import { format } from "date-fns";
+import Swal from "sweetalert2";
+import { Trash2 } from "lucide-react";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -30,12 +34,10 @@ const BookDetails = () => {
       .catch(err => console.error("Error fetching comments:", err));
   }, [id]);
 
+  // Post comment
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (!user) {
-      alert("You must be logged in to comment.");
-      return;
-    }
+    if (!user) return alert("You must be logged in to comment.");
     if (!newComment.trim()) return;
 
     const commentData = {
@@ -58,6 +60,30 @@ const BookDetails = () => {
     }
   };
 
+  // Delete comment
+  const handleDeleteComment = async (commentId) => {
+    const confirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    });
+
+    if (confirm.isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:3000/comments/${commentId}`, { data: { userId: user.uid } });
+        setComments(comments.filter(c => c._id !== commentId));
+        Swal.fire("Deleted!", "Your comment has been deleted.", "success");
+      } catch (err) {
+        console.error("Error deleting comment:", err);
+        Swal.fire("Error", "Failed to delete comment.", "error");
+      }
+    }
+  };
+
   if (loading || !book) return <LoadingSpinner />;
 
   return (
@@ -75,10 +101,6 @@ const BookDetails = () => {
             By <span className="font-medium">{book.author}</span>
           </p>
           {book.genre && <p className="text-gray-500 dark:text-gray-400 mb-1">Genre: {book.genre}</p>}
-          {book.publishedDate && <p className="text-gray-500 dark:text-gray-400 mb-1">Published: {book.publishedDate}</p>}
-          {book.publisher && <p className="text-gray-500 dark:text-gray-400 mb-1">Publisher: {book.publisher}</p>}
-          {book.pages && <p className="text-gray-500 dark:text-gray-400 mb-1">Pages: {book.pages}</p>}
-          {book.language && <p className="text-gray-500 dark:text-gray-400 mb-1">Language: {book.language}</p>}
           {book.rating && (
             <p className="text-yellow-500 font-semibold mb-3">
               Rating: {book.rating} / 5 ⭐
@@ -90,17 +112,10 @@ const BookDetails = () => {
 
       <hr className="my-6 border-gray-300 dark:border-gray-700" />
 
-      {/* Extra Details */}
-      <div className="flex flex-wrap gap-4 mt-4">
-        {book.isBestseller && <span className="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 px-3 py-1 rounded-full font-semibold">Bestseller</span>}
-        {book.isNew && <span className="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 px-3 py-1 rounded-full font-semibold">New Arrival</span>}
-      </div>
-
       {/* Comments Section */}
       <div className="mt-10">
         <h2 className="text-2xl font-bold mb-4">Comments</h2>
 
-        {/* Comment Form */}
         {user && (
           <form onSubmit={handleCommentSubmit} className="mb-6">
             <textarea
@@ -121,27 +136,44 @@ const BookDetails = () => {
           </form>
         )}
 
-        {/* Comments List */}
         {comments.length === 0 ? (
           <p className="text-gray-500 dark:text-gray-400">No comments yet.</p>
         ) : (
           <ul className="space-y-4">
             {comments.map((c) => (
               <li key={c._id} className="p-4 border rounded-lg bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-3 mb-2">
-                  {c.userPhoto && (
-                    <img
-                      src={c.userPhoto}
-                      alt={c.userName}
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                  )}
-                  <div>
-                    <p className="font-semibold text-gray-900 dark:text-gray-100">{c.userName}</p>
-                    <p className="text-gray-400 dark:text-gray-400 text-sm">
-                      {format(new Date(c.createdAt), "PPP p")}
-                    </p>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    {c.userPhoto && (
+                      <img
+                        src={c.userPhoto}
+                        alt={c.userName}
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                    )}
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">{c.userName}</p>
+                      <p className="text-gray-400 dark:text-gray-400 text-sm">
+                        {format(new Date(c.createdAt), "PPP p")}
+                      </p>
+                    </div>
                   </div>
+
+                  {user && user.uid === c.userId && (
+                    <>
+                      <Trash2
+                        id={`delete-tooltip-${c._id}`}
+                        onClick={() => handleDeleteComment(c._id)}
+                        className="w-5 h-5 text-red-500 cursor-pointer hover:text-red-700"
+                      />
+                      <Tooltip
+                        anchorId={`delete-tooltip-${c._id}`}
+                        content="Delete Comment"
+                        className="bg-blue-700 text-white text-sm z-[9999]"
+                        place="top"
+                      />
+                    </>
+                  )}
                 </div>
                 <p className="text-gray-800 dark:text-gray-200">{c.comment}</p>
               </li>
@@ -154,4 +186,3 @@ const BookDetails = () => {
 };
 
 export default BookDetails;
-
