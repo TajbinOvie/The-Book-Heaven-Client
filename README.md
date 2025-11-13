@@ -1,16 +1,82 @@
-# React + Vite
+# The Book Heaven
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**The Book Heaven** is a modern web application designed for book lovers to explore, manage, and discover books. The site features a clean and responsive interface, animations, and user-friendly functionalities.
 
-Currently, two official plugins are available:
+**Live Site:** [Add your live site URL here]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 📚 **Browse Latest & All Books**: View the latest releases and explore the full collection of books with ratings and details.  
+- ⭐ **Book of the Week**: Highlighted featured book based on high ratings.  
+- 📝 **User Book Management**: Authenticated users can add, update, or delete their books.  
+- 🔥 **Animations & Interactive UI**: Smooth transitions and hover effects using Framer Motion.  
+- 🌓 **Dark Mode Support**: Toggle between light and dark themes seamlessly.  
+- 👀 **Tooltips & Alerts**: Helpful tooltips for buttons and SweetAlert2 for confirmations.  
+- 🌐 **Authentication**: Firebase-based authentication with email/password and Google Sign-In.  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+- **Frontend:** React  
+- **Styling:** Tailwind CSS, DaisyUI  
+- **Routing:** React Router  
+- **Icons:** Lucide React Icons  
+- **Animations:** Framer Motion  
+- **Alerts & Confirmations:** SweetAlert2  
+- **Authentication & User Management:** Firebase  
+- **HTTP Requests:** Axios  
+- **Tooltips:** react-tooltip  
+- **Date Utilities:** date-fns  
+- **Custom Components:** Loading spinner, responsive tables, cards, and buttons  
+
+---
+
+## Installation & Setup
+
+1. Clone the repository:
+
+Navigate to the project directory:
+
+
+Copy code
+cd the-book-heaven
+Install dependencies:
+
+
+Copy code
+npm install
+Start the development server:
+
+
+Copy code
+npm start
+Folder Structure (Client Side)
+
+Copy code
+src/
+│
+├─ components/      # Reusable components (BookCard, LoadingSpinner, etc.)
+├─ pages/           # Page components (AllBooks, MyBooks, BookOfTheWeek, Register, etc.)
+├─ Provider/        # Context providers (AuthContext)
+├─ Firebase/        # Firebase config and utilities
+├─ App.jsx          # Main application component
+└─ index.jsx        # Entry point
+
+Future Improvements
+Add book search and filter functionalities.
+
+Implement pagination for the books table.
+
+Add reviews and ratings for each book.
+
+Enable profile customization for users.
+
+License
+This project is open-source and available under the MIT License.
+
+Author
+
+Your Name – Tajbin Ovie

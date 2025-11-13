@@ -1,6 +1,6 @@
 import { Eye, EyeClosed } from 'lucide-react';
 import React, { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { auth } from '../Firebase/Firebase.config';
 import { GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import Swal from 'sweetalert2';
@@ -11,9 +11,7 @@ const Register = () => {
     const { createUserWithEmailAndPasswordFunction, provider, setUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
-    const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from?.pathname || "/";
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -32,7 +30,7 @@ const Register = () => {
         createUserWithEmailAndPasswordFunction(email, password)
             .then(async (res) => {
                 const user = res.user;
-                // ✅ Update displayName and photoURL
+                // Update displayName and photoURL
                 await updateProfile(user, {
                     displayName: name,
                     photoURL: photoURL,
@@ -40,7 +38,7 @@ const Register = () => {
 
                 setUser({ ...user, displayName: name, photoURL: photoURL });
                 Swal.fire("Registration successful!");
-                navigate(from, { replace: true });
+                navigate("/", { replace: true }); // Navigate to homepage
             })
             .catch((e) => {
                 Swal.fire(e.message);
@@ -52,7 +50,7 @@ const Register = () => {
             .then((res) => {
                 setUser(res.user);
                 Swal.fire("Successfully registered with Google!");
-                navigate(from, { replace: true });
+                navigate("/", { replace: true }); // Navigate to homepage
             })
             .catch((e) => {
                 Swal.fire(e.message);
@@ -127,7 +125,7 @@ const Register = () => {
                         </span>
                     </div>
 
-                    {/* Main Register Button */}
+                    {/* Register Button */}
                     <button
                         type="submit"
                         className="w-full btn bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg mt-3"
@@ -135,7 +133,7 @@ const Register = () => {
                         Register
                     </button>
 
-                    {/* Google Register Button */}
+                    {/* Google Register */}
                     <button
                         type="button"
                         onClick={handleGoogleSignIn}

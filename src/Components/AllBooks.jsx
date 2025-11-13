@@ -3,11 +3,12 @@ import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
 import { Link } from 'react-router';
 import { FaStar } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sortOrder, setSortOrder] = useState('desc'); // default: highest to lowest
+  const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
     axios.get('http://localhost:3000/books')
@@ -21,7 +22,6 @@ const AllBooks = () => {
       });
   }, []);
 
-  // Sort books based on rating
   const sortedBooks = [...books].sort((a, b) => {
     const ratingA = parseFloat(a.rating) || 0;
     const ratingB = parseFloat(b.rating) || 0;
@@ -31,15 +31,14 @@ const AllBooks = () => {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div className="min-h-screen py-10 px-6 bg-base-200 dark:bg-gray-900 text-base-content dark:text-gray-200">
+    <div className="min-h-screen py-10 px-4 md:px-6 bg-base-200 dark:bg-gray-900 text-base-content dark:text-gray-200">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
+        {/* Header */}
         <div className="flex flex-col md:flex-row justify-between md:items-center mb-10 gap-4">
           <h2 className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 text-center md:text-left">
             All Books
           </h2>
 
-          {/* Sort Dropdown */}
           <div className="flex items-center justify-center gap-2 whitespace-nowrap">
             <label htmlFor="sort" className="font-medium text-gray-700 dark:text-gray-300 mb-0">
               Sort by Rating:
@@ -56,28 +55,38 @@ const AllBooks = () => {
           </div>
         </div>
 
-        {/* Table Section */}
+        {/* Table */}
         {books.length === 0 ? (
           <div className="text-center text-gray-500 dark:text-gray-400 mt-20">
             <p>No books found</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-base-100 dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+          <div className="overflow-x-hidden">
+            <table
+              className="w-full table-auto border-collapse bg-base-100 dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 max-w-full"
+              style={{ tableLayout: "fixed" }}
+            >
               <thead className="bg-indigo-100 dark:bg-indigo-900 text-left">
                 <tr>
                   <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">#</th>
                   <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Cover</th>
-                  <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Title</th>
+                  <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700 max-w-[180px]">Title</th>
                   <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Author</th>
                   <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Genre</th>
                   <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Rating</th>
                   <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Actions</th>
                 </tr>
               </thead>
+
               <tbody>
                 {sortedBooks.map((book, index) => (
-                  <tr key={book._id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                  <motion.tr
+                    key={book._id}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border-b last:border-none"
+                  >
                     <td className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">{index + 1}</td>
                     <td className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">
                       <img
@@ -86,12 +95,12 @@ const AllBooks = () => {
                         className="w-12 h-16 object-cover rounded"
                       />
                     </td>
-                    <td className="px-4 py-3 border-b border-gray-300 dark:border-gray-700 font-medium">{book.title}</td>
+                    <td className="px-4 py-3 border-b border-gray-300 dark:border-gray-700 font-medium truncate max-w-[180px]">{book.title}</td>
                     <td className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">{book.author}</td>
                     <td className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">{book.genre || "N/A"}</td>
                     <td className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">
-                      <span className="inline-flex items-center gap-1">
-                        <FaStar className="text-yellow-400" />
+                      <span className="inline-flex items-center gap-1 text-yellow-400">
+                        <FaStar />
                         <span>{book.rating || "N/A"}</span>
                       </span>
                     </td>
@@ -103,7 +112,7 @@ const AllBooks = () => {
                         View Details
                       </Link>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
               </tbody>
             </table>
@@ -115,6 +124,8 @@ const AllBooks = () => {
 };
 
 export default AllBooks;
+
+
 
 
 

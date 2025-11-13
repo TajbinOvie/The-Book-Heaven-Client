@@ -48,7 +48,7 @@ const BookOfTheWeek = () => {
         <motion.img
           src={book.coverImage}
           alt={book.title}
-          className="w-full md:w-1/3 h-80 object-cover rounded-lg shadow-md"
+          className="w-full md:w-1/3 h-[400px] md:h-[500px] object-contain rounded-lg shadow-md"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         />
@@ -80,5 +80,6 @@ const BookOfTheWeek = () => {
 };
 
 export default BookOfTheWeek;
+
 
 
