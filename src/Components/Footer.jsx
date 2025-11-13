@@ -1,6 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6'; // <-- new X (Twitter) icon
 
 const Footer = () => {
     const currentYear = format(new Date(), 'yyyy');
@@ -42,13 +43,28 @@ const Footer = () => {
                 <div>
                     <h6 className="text-lg font-semibold mb-4">Follow Us</h6>
                     <div className="flex gap-4 mt-2">
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-200 transition">
+                        <a
+                            href="https://facebook.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-indigo-200 transition"
+                        >
                             <FaFacebookF size={20} />
                         </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-200 transition">
-                            <FaTwitter size={20} />
+                        <a
+                            href="https://twitter.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-indigo-200 transition"
+                        >
+                            <FaXTwitter size={20} /> {/* X logo */}
                         </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-200 transition">
+                        <a
+                            href="https://instagram.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-indigo-200 transition"
+                        >
                             <FaInstagram size={20} />
                         </a>
                     </div>
@@ -63,4 +79,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

@@ -6,61 +6,68 @@ import { Link } from "react-router";
 const BookCard = ({ book }) => {
   return (
     <motion.div
-      className="bg-white dark:bg-gray-800 shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
-      initial={{ opacity: 0, y: 80 }}
+      className="group relative border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden rounded-md transition-all duration-500 h-96"
+      initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      whileHover={{ scale: 1.03 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <div className="relative">
+      {/* Book Cover */}
+      <div className="relative h-3/4">
         <img
-          src={book?.coverImage || "https://via.placeholder.com/400x300?text=No+Image"}
-          alt={book?.title || "Book Cover"}
-          className="w-full h-48 object-cover"
+          src={book?.coverImage || 'https://via.placeholder.com/300x400?text=No+Image'}
+          alt={book?.title || 'Book Cover'}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {book?.isNew && (
-          <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-            New
-          </span>
-        )}
       </div>
 
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-          {book?.title}
-        </h3>
-        <p className="text-sm text-gray-500 dark:text-gray-300 mt-1">
-          By {book?.author || "Unknown"}
-        </p>
+      {/* White Overlay (slides up on hover) */}
+      <div className="absolute inset-x-0 bottom-0 bg-white dark:bg-gray-800 translate-y-[30%] group-hover:translate-y-0 transition-transform duration-500 p-4 flex flex-col justify-between">
+        <div>
+          <p className="text-xs text-rose-600 font-semibold uppercase tracking-wide mb-1">
+            {book?.genre || 'Paperback'}
+          </p>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug mb-1">
+            {book?.title || 'Untitled Book'}
+          </h3>
+          <p className="text-sm text-gray-500 dark:text-gray-300 mb-2">
+            {book?.author || 'Unknown Author'}
+          </p>
 
-        <div className="flex items-center gap-1 mt-2">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-          ))}
-          <span className="text-sm text-gray-600 dark:text-gray-300 ml-1">
-            {book.rating}
-          </span>
+          {/* Rating */}
+          <div className="flex items-center gap-1 mb-3">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className={`w-4 h-4 ${
+                  i < Math.round(book?.rating || 0)
+                    ? 'text-yellow-400 fill-yellow-400'
+                    : 'text-gray-300 dark:text-gray-600'
+                }`}
+              />
+            ))}
+            {book?.rating && (
+              <span className="text-sm text-gray-600 dark:text-gray-300 ml-1">
+                ({book.rating})
+              </span>
+            )}
+          </div>
         </div>
 
-        <p className="text-gray-700 dark:text-gray-300 text-sm mt-3 line-clamp-2">
-          {book?.summary || "No description available for this book at the moment."}
-        </p>
-
-        <div className="flex items-center justify-between mt-4">
-          <span className="text-lg font-semibold text-blue-600 dark:text-blue-400">
-            ${book?.price || "Free"}
-          </span>
-          <Link
-            to={`/books/${book._id}`}
-            className="px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition"
-          >
-            View Details
-          </Link>
-        </div>
+        {/* Hidden button appears on hover */}
+        <Link
+          to={`/books/${book._id}`}
+          className="opacity-0 group-hover:opacity-100 mt-3 inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition-opacity duration-300"
+        >
+          View Details
+        </Link>
       </div>
     </motion.div>
   );
 };
 
 export default BookCard;
+
+
+
+

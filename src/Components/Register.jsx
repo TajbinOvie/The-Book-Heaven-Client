@@ -1,8 +1,8 @@
 import { Eye, EyeClosed } from 'lucide-react';
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { auth } from '../Firebase/Firebase.config';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Provider/AuthContext';
 import { getYear } from 'date-fns';
@@ -10,6 +10,10 @@ import { getYear } from 'date-fns';
 const Register = () => {
     const { createUserWithEmailAndPasswordFunction, provider, setUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -26,19 +30,31 @@ const Register = () => {
         }
 
         createUserWithEmailAndPasswordFunction(email, password)
-            .then(res => {
-                Swal.fire("Register successful.");
-            }).catch(e => {
+            .then(async (res) => {
+                const user = res.user;
+                // ✅ Update displayName and photoURL
+                await updateProfile(user, {
+                    displayName: name,
+                    photoURL: photoURL,
+                });
+
+                setUser({ ...user, displayName: name, photoURL: photoURL });
+                Swal.fire("Registration successful!");
+                navigate(from, { replace: true });
+            })
+            .catch((e) => {
                 Swal.fire(e.message);
             });
     };
 
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, provider)
-            .then(res => {
+            .then((res) => {
                 setUser(res.user);
                 Swal.fire("Successfully registered with Google!");
-            }).catch(e => {
+                navigate(from, { replace: true });
+            })
+            .catch((e) => {
                 Swal.fire(e.message);
             });
     };
@@ -50,19 +66,25 @@ const Register = () => {
                     Create Account
                 </h2>
                 <form onSubmit={handleRegister} className="space-y-5">
+                    {/* Full Name */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Full Name
+                        </label>
                         <input
                             type="text"
                             name="name"
-                            placeholder="Your name"
+                            placeholder="Your full name"
                             className="input input-bordered w-full rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             required
                         />
                     </div>
 
+                    {/* Email */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Email
+                        </label>
                         <input
                             type="email"
                             name="email"
@@ -72,19 +94,24 @@ const Register = () => {
                         />
                     </div>
 
+                    {/* Photo URL */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">PhotoURL</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Photo URL
+                        </label>
                         <input
                             type="text"
                             name="photoURL"
-                            placeholder=""
+                            placeholder="https://example.com/photo.jpg"
                             className="input input-bordered w-full rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                            required
                         />
                     </div>
 
-                    <div className='relative'>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+                    {/* Password */}
+                    <div className="relative">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Password
+                        </label>
                         <input
                             type={showPassword ? "text" : "password"}
                             name="password"
@@ -92,7 +119,10 @@ const Register = () => {
                             className="input input-bordered w-full rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             required
                         />
-                        <span onClick={() => setShowPassword(!showPassword)} className='absolute right-2 top-[30px] cursor-pointer z-50 text-gray-600 dark:text-gray-300'>
+                        <span
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-2 top-[30px] cursor-pointer text-gray-600 dark:text-gray-300"
+                        >
                             {showPassword ? <Eye /> : <EyeClosed />}
                         </span>
                     </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const ErrorPage = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-red-50 via-white to-red-100 px-6">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6">
       <h1 className="text-9xl font-extrabold text-red-600">404</h1>
       <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-4">
         Oops! Page not found

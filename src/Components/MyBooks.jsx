@@ -5,6 +5,8 @@ import { FaStar, FaTrashAlt, FaEdit, FaBook } from "react-icons/fa";
 import LoadingSpinner from "./LoadingSpinner";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 const MyBooks = () => {
     const { user } = useContext(AuthContext);
@@ -96,9 +98,9 @@ const MyBooks = () => {
                                         key={book._id}
                                         className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border-b last:border-none"
                                     >
-                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">{index + 1}</td>
+                                        <td className="px-4 py-3">{index + 1}</td>
 
-                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">
+                                        <td className="px-4 py-3">
                                             <img
                                                 src={book.coverImage || "https://via.placeholder.com/60x90?text=No+Image"}
                                                 alt={book.title}
@@ -106,42 +108,63 @@ const MyBooks = () => {
                                             />
                                         </td>
 
-                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700 font-medium truncate max-w-[200px]">
+                                        <td className="px-4 py-3 font-medium truncate max-w-[200px]">
                                             {book.title}
                                         </td>
 
-                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">{book.author}</td>
-                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">{book.genre || "N/A"}</td>
+                                        <td className="px-4 py-3">{book.author}</td>
+                                        <td className="px-4 py-3">{book.genre || "N/A"}</td>
 
-                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">
+                                        <td className="px-4 py-3">
                                             <span className="inline-flex items-center gap-1 text-yellow-500">
                                                 <FaStar />
                                                 <span>{book.rating || "N/A"}</span>
                                             </span>
                                         </td>
 
-                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700 text-center">
+                                        <td className="px-4 py-3 text-center">
                                             <div className="flex items-center justify-center gap-4">
+                                                {/* View */}
                                                 <Link
                                                     to={`/books/${book._id}`}
+                                                    id={`view-${book._id}`}
                                                     className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 font-medium"
                                                 >
                                                     View
                                                 </Link>
+                                                <Tooltip
+                                                    anchorSelect={`#view-${book._id}`}
+                                                    content="View Book Details"
+                                                    className="bg-blue-700 text-white text-sm z-[9999]"
+                                                />
 
+                                                {/* Update */}
                                                 <Link
                                                     to={`/update-book/${book._id}`}
+                                                    id={`edit-${book._id}`}
                                                     className="flex items-center gap-1 text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200"
                                                 >
                                                     <FaEdit /> Update
                                                 </Link>
+                                                <Tooltip
+                                                    anchorSelect={`#edit-${book._id}`}
+                                                    content="Update this Book"
+                                                    className="bg-green-700 text-white text-sm z-[9999]"
+                                                />
 
+                                                {/* Delete */}
                                                 <button
+                                                    id={`delete-${book._id}`}
                                                     onClick={() => handleDelete(book._id)}
                                                     className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-600"
                                                 >
                                                     <FaTrashAlt />
                                                 </button>
+                                                <Tooltip
+                                                    anchorSelect={`#delete-${book._id}`}
+                                                    content="Delete this Book"
+                                                    className="bg-red-700 text-white text-sm z-[9999]"
+                                                />
                                             </div>
                                         </td>
                                     </tr>

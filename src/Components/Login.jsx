@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Eye, EyeClosed } from 'lucide-react';
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { auth } from '../Firebase/Firebase.config';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Provider/AuthContext';
@@ -10,6 +10,10 @@ import { getYear } from 'date-fns';
 const Login = () => {
     const { logInUserWithEmailAndPasswordFunction, provider, setUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -20,6 +24,7 @@ const Login = () => {
             .then(res => {
                 setUser(res.user);
                 Swal.fire("Successfully logged in!");
+                navigate(from, { replace: true });
             }).catch(e => {
                 Swal.fire(e.message);
             });
@@ -30,6 +35,7 @@ const Login = () => {
             .then(res => {
                 setUser(res.user);
                 Swal.fire("Successfully logged in!");
+                navigate(from, { replace: true });
             }).catch(e => {
                 Swal.fire(e.message);
             });

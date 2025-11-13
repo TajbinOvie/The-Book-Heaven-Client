@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router';
 import { AuthContext } from '../Provider/AuthContext';
 import Swal from 'sweetalert2';
@@ -12,74 +12,83 @@ const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || "light");
 
+    const dropdownRef = useRef(null);
+
+    // Theme setup
     useEffect(() => {
         const html = document.querySelector('html');
         html.setAttribute("data-theme", theme);
         localStorage.setItem("theme", theme);
     }, [theme]);
 
+    // Close dropdown if clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
+
     const navLinks = (
         <>
-<li>
-  <NavLink
-    to="/"
-    className={({ isActive }) =>
-      `px-3 py-2 rounded-md text-sm font-medium transition block ${
-        isActive
-          ? "underline underline-offset-4 decoration-white"
-          : "hover:bg-indigo-600 hover:text-white"
-      }`
-    }
-  >
-    Home
-  </NavLink>
-</li>
+            <li>
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        `px-3 py-2 rounded-md text-sm font-medium transition block ${isActive
+                            ? "underline underline-offset-4 decoration-white"
+                            : "hover:bg-indigo-600 hover:text-white"
+                        }`
+                    }
+                >
+                    Home
+                </NavLink>
+            </li>
 
-<li>
-  <NavLink
-    to="/books"
-    className={({ isActive }) =>
-      `px-3 py-2 rounded-md text-sm font-medium transition block ${
-        isActive
-          ? "underline underline-offset-4 decoration-white"
-          : "hover:bg-indigo-600 hover:text-white"
-      }`
-    }
-  >
-    All Books
-  </NavLink>
-</li>
+            <li>
+                <NavLink
+                    to="/books"
+                    className={({ isActive }) =>
+                        `px-3 py-2 rounded-md text-sm font-medium transition block ${isActive
+                            ? "underline underline-offset-4 decoration-white"
+                            : "hover:bg-indigo-600 hover:text-white"
+                        }`
+                    }
+                >
+                    All Books
+                </NavLink>
+            </li>
 
-<li>
-  <NavLink
-    to="/add-book"
-    className={({ isActive }) =>
-      `px-3 py-2 rounded-md text-sm font-medium transition block ${
-        isActive
-          ? "underline underline-offset-4 decoration-white"
-          : "hover:bg-indigo-600 hover:text-white"
-      }`
-    }
-  >
-    Add Books
-  </NavLink>
-</li>
+            <li>
+                <NavLink
+                    to="/add-book"
+                    className={({ isActive }) =>
+                        `px-3 py-2 rounded-md text-sm font-medium transition block ${isActive
+                            ? "underline underline-offset-4 decoration-white"
+                            : "hover:bg-indigo-600 hover:text-white"
+                        }`
+                    }
+                >
+                    Add Books
+                </NavLink>
+            </li>
 
-<li>
-  <NavLink
-    to="/my-books"
-    className={({ isActive }) =>
-      `px-3 py-2 rounded-md text-sm font-medium transition block ${
-        isActive
-          ? "underline underline-offset-4 decoration-white"
-          : "hover:bg-indigo-600 hover:text-white"
-      }`
-    }
-  >
-    My Books
-  </NavLink>
-</li>
-
+            <li>
+                <NavLink
+                    to="/my-books"
+                    className={({ isActive }) =>
+                        `px-3 py-2 rounded-md text-sm font-medium transition block ${isActive
+                            ? "underline underline-offset-4 decoration-white"
+                            : "hover:bg-indigo-600 hover:text-white"
+                        }`
+                    }
+                >
+                    My Books
+                </NavLink>
+            </li>
         </>
     );
 
@@ -98,12 +107,11 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
 
-                    {/* Logo */}
+                    {/* Logo + Desktop menu */}
                     <div className="flex items-center">
                         <div className="flex-shrink-0 text-xl font-bold">
                             <NavLink to="/">Book Heaven</NavLink>
                         </div>
-                        {/* Desktop menu */}
                         <div className="hidden lg:flex lg:ml-10">
                             <ul className="flex space-x-4">{navLinks}</ul>
                         </div>
@@ -128,21 +136,35 @@ const Navbar = () => {
                             />
                         </div>
 
+                        {/* Auth buttons or user menu */}
                         {!user ? (
                             <>
                                 <NavLink className="btn btn-outline btn-sm text-white border-white" to="/login">Login</NavLink>
                                 <NavLink className="btn btn-primary btn-sm text-white" to="/register">Register</NavLink>
                             </>
                         ) : (
-                            <div className="relative">
+                            <div ref={dropdownRef} className="relative">
+                                {/* Profile image with tooltip */}
                                 <img
+                                    id="profile-img"
                                     src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
                                     alt="User"
                                     className="w-10 h-10 rounded-full cursor-pointer border-2 border-white"
                                     onClick={() => setDropdownOpen(!dropdownOpen)}
                                 />
+                                <Tooltip
+                                    anchorId="profile-img"
+                                    content={user.displayName || "User"}
+                                    className="bg-blue-700 text-white text-sm z-[9999]"
+                                    place="bottom"
+                                />
+
+                                {/* Dropdown */}
                                 {dropdownOpen && (
-                                    <ul className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-50 text-gray-800">
+                                    <ul className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg py-2 z-50 text-gray-800">
+                                        <li className="px-4 py-2 font-semibold text-blue-600 border-b border-gray-200">
+                                            {user.displayName || "User"}
+                                        </li>
                                         <li className="px-4 py-2 hover:bg-blue-100 rounded transition">
                                             <NavLink to="/profile" className="block">Profile</NavLink>
                                         </li>
@@ -164,7 +186,14 @@ const Navbar = () => {
                                 className="p-2 rounded-md hover:bg-blue-700 transition"
                             >
                                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d={mobileMenuOpen
+                                            ? "M6 18L18 6M6 6l12 12"
+                                            : "M4 6h16M4 12h16M4 18h16"}
+                                    />
                                 </svg>
                             </button>
                         </div>
@@ -180,7 +209,7 @@ const Navbar = () => {
                                 <p className="px-3 py-2">{user.displayName || "User"}</p>
                                 <button
                                     onClick={handleLogout}
-                                    className="w-full text-left px-3 py-2 hover:bg-red-500 rounded transition text-red-600"
+                                    className="w-full text-left px-3 py-2 hover:bg-red-500 rounded transition text-red-200"
                                 >
                                     Logout
                                 </button>
@@ -194,4 +223,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 

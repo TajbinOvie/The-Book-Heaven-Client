@@ -100,7 +100,7 @@ const AllBooks = () => {
                         to={`/books/${book._id}`}
                         className="px-3 py-1 bg-blue-600 dark:bg-blue-500 text-white rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition"
                       >
-                        View
+                        View Details
                       </Link>
                     </td>
                   </tr>
