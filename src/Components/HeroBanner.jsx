@@ -10,7 +10,7 @@ const HeroBanner = () => {
 
   // Fetch books once
   useEffect(() => {
-    axios.get("http://localhost:3000/books")
+    axios.get("https://the-book-heaven-server.vercel.app/books")
       .then(res => {
         const shuffled = res.data.sort(() => 0.5 - Math.random()).slice(0, 3);
         setBooks(shuffled);

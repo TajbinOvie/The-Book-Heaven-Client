@@ -11,7 +11,7 @@ const BookOfTheWeek = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/books");
+        const res = await axios.get("https://the-book-heaven-server.vercel.app/books");
         const books = res.data;
 
         const featuredBook = books.find((b) => b.rating >= 4.9);

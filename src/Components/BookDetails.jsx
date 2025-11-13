@@ -21,7 +21,7 @@ const BookDetails = () => {
   // Fetch book details
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:3000/books/${id}`)
+    axios.get(`https://the-book-heaven-server.vercel.app/books/${id}`)
       .then(res => setBook(res.data.result))
       .catch(err => console.error("Error fetching book:", err))
       .finally(() => setLoading(false));
@@ -29,7 +29,7 @@ const BookDetails = () => {
 
   // Fetch comments
   useEffect(() => {
-    axios.get(`http://localhost:3000/comments/${id}`)
+    axios.get(`https://the-book-heaven-server.vercel.app/comments/${id}`)
       .then(res => setComments(res.data))
       .catch(err => console.error("Error fetching comments:", err));
   }, [id]);
@@ -50,7 +50,7 @@ const BookDetails = () => {
 
     try {
       setCommentLoading(true);
-      const res = await axios.post("http://localhost:3000/comments", commentData);
+      const res = await axios.post("https://the-book-heaven-server.vercel.app/comments", commentData);
       setComments([res.data.comment, ...comments]);
       setNewComment("");
     } catch (err) {
@@ -74,7 +74,7 @@ const BookDetails = () => {
 
     if (confirm.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/comments/${commentId}`, { data: { userId: user.uid } });
+        await axios.delete(`https://the-book-heaven-server.vercel.app/comments/${commentId}`, { data: { userId: user.uid } });
         setComments(comments.filter(c => c._id !== commentId));
         Swal.fire("Deleted!", "Your comment has been deleted.", "success");
       } catch (err) {

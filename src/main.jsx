@@ -71,7 +71,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute>
           <UpdateBook></UpdateBook>
         </PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:3000/books/${params.id}`)
+        loader: ({params}) => fetch(`https://the-book-heaven-server.vercel.app/books/${params.id}`)
       },
       {
         path: "/my-books",

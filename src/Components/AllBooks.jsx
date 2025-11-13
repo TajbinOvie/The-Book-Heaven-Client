@@ -11,7 +11,7 @@ const AllBooks = () => {
   const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
-    axios.get('http://localhost:3000/books')
+    axios.get('https://the-book-heaven-server.vercel.app/books')
       .then(res => {
         setBooks(res.data);
         setLoading(false);

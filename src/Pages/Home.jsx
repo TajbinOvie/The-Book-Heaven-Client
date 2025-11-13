@@ -16,11 +16,11 @@ const Home = () => {
     const fetchBooks = async () => {
       try {
         // Fetch latest 3 books for HeroBanner
-        const heroRes = await axios.get('http://localhost:3000/books');
+        const heroRes = await axios.get('https://the-book-heaven-server.vercel.app/books');
         setBooks(heroRes.data);
 
         // Fetch latest 6 books for LatestBooks section
-        const latestRes = await axios.get('http://localhost:3000/latest-books');
+        const latestRes = await axios.get('https://the-book-heaven-server.vercel.app/latest-books');
         setLatestBooks(latestRes.data);
 
         setLoading(false);

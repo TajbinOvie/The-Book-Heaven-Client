@@ -5,7 +5,7 @@ const TopRatedBooks = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/top-rated")
+    axios.get("https://the-book-heaven-server.vercel.app/top-rated")
       .then(res => setBooks(res.data))
       .catch(err => console.log(err));
   }, []);

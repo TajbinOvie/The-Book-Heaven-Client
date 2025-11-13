@@ -4,7 +4,7 @@ const TopGenre = () => {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/top-genres") 
+    fetch("https://the-book-heaven-server.vercel.app/top-genres") 
       .then(res => res.json())
       .then(data => setGenres(data))
       .catch(err => console.error(err));

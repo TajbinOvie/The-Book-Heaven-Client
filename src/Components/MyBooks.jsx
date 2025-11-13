@@ -19,7 +19,7 @@ const MyBooks = () => {
 
     const fetchBooks = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/books?email=${user.email}`);
+        const res = await axios.get(`https://the-book-heaven-server.vercel.app/books?email=${user.email}`);
         setBooks(res.data.result || res.data);
       } catch (err) {
         console.error("Error fetching books:", err);
@@ -44,7 +44,7 @@ const MyBooks = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/books/${id}`);
+        await axios.delete(`https://the-book-heaven-server.vercel.app/books/${id}`);
         setBooks((prev) => prev.filter((book) => book._id !== id));
         Swal.fire("Deleted!", "The book has been deleted successfully.", "success");
       } catch (error) {

@@ -38,7 +38,7 @@ const UpdateBook = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.put(`http://localhost:3000/books/${id}`, formData, {
+      const res = await axios.put(`https://the-book-heaven-server.vercel.app/books/${id}`, formData, {
         headers: { "Content-Type": "application/json" },
       });
 
