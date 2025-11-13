@@ -65,28 +65,28 @@ const MyBooks = () => {
     if (loading) return <LoadingSpinner />;
 
     return (
-        <div className="min-h-screen  py-10 px-6">
+        <div className="min-h-screen py-10 px-6 bg-base-200 dark:bg-gray-900 text-base-content dark:text-gray-200">
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-4xl font-bold text-center text-indigo-600 mb-10 flex items-center justify-center gap-2">
-                    <FaBook className="text-blue-500" /> My Books
+                <h2 className="text-4xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-10 flex items-center justify-center gap-2">
+                    <FaBook className="text-blue-500 dark:text-blue-400" /> My Books
                 </h2>
 
                 {books.length === 0 ? (
-                    <div className="text-center text-gray-500 mt-20">
+                    <div className="text-center text-gray-500 dark:text-gray-400 mt-20">
                         <p>You haven’t added any books yet.</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
-                        <table className="min-w-full bg-white rounded-lg shadow-md border border-gray-200">
-                            <thead className="bg-indigo-100 text-left">
+                        <table className="min-w-full bg-base-100 dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                            <thead className="bg-indigo-100 dark:bg-indigo-900 text-left">
                                 <tr>
-                                    <th className="px-4 py-3 border-b">#</th>
-                                    <th className="px-4 py-3 border-b">Cover</th>
-                                    <th className="px-4 py-3 border-b">Title</th>
-                                    <th className="px-4 py-3 border-b">Author</th>
-                                    <th className="px-4 py-3 border-b">Genre</th>
-                                    <th className="px-4 py-3 border-b">Rating</th>
-                                    <th className="px-4 py-3 border-b text-center">Actions</th>
+                                    <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">#</th>
+                                    <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Cover</th>
+                                    <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Title</th>
+                                    <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Author</th>
+                                    <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Genre</th>
+                                    <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700">Rating</th>
+                                    <th className="px-4 py-3 border-b border-gray-300 dark:border-gray-700 text-center">Actions</th>
                                 </tr>
                             </thead>
 
@@ -94,54 +94,51 @@ const MyBooks = () => {
                                 {books.map((book, index) => (
                                     <tr
                                         key={book._id}
-                                        className="hover:bg-gray-50 transition border-b last:border-none"
+                                        className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border-b last:border-none"
                                     >
-                                        <td className="px-4 py-3">{index + 1}</td>
+                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">{index + 1}</td>
 
-                                        <td className="px-4 py-3">
+                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">
                                             <img
-                                                src={
-                                                    book.coverImage ||
-                                                    "https://via.placeholder.com/60x90?text=No+Image"
-                                                }
+                                                src={book.coverImage || "https://via.placeholder.com/60x90?text=No+Image"}
                                                 alt={book.title}
                                                 className="w-12 h-16 object-cover rounded"
                                             />
                                         </td>
 
-                                        <td className="px-4 py-3 font-medium text-gray-800 truncate max-w-[200px]">
+                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700 font-medium truncate max-w-[200px]">
                                             {book.title}
                                         </td>
 
-                                        <td className="px-4 py-3 text-gray-600">{book.author}</td>
-                                        <td className="px-4 py-3 text-gray-600">{book.genre}</td>
+                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">{book.author}</td>
+                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">{book.genre || "N/A"}</td>
 
-                                        <td className="px-4 py-3 text-gray-600">
-                                            <span className="inline-flex items-center gap-1">
-                                                <FaStar className="text-yellow-400" />
+                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700">
+                                            <span className="inline-flex items-center gap-1 text-yellow-500">
+                                                <FaStar />
                                                 <span>{book.rating || "N/A"}</span>
                                             </span>
                                         </td>
 
-                                        <td className="px-4 py-3 text-center">
+                                        <td className="px-4 py-3 border-gray-300 dark:border-gray-700 text-center">
                                             <div className="flex items-center justify-center gap-4">
                                                 <Link
                                                     to={`/books/${book._id}`}
-                                                    className="text-blue-600 hover:text-blue-800 font-medium"
+                                                    className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 font-medium"
                                                 >
                                                     View
                                                 </Link>
 
                                                 <Link
                                                     to={`/update-book/${book._id}`}
-                                                    className="flex items-center gap-1 text-green-600 hover:text-green-800"
+                                                    className="flex items-center gap-1 text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200"
                                                 >
                                                     <FaEdit /> Update
                                                 </Link>
 
                                                 <button
                                                     onClick={() => handleDelete(book._id)}
-                                                    className="text-red-500 hover:text-red-700"
+                                                    className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-600"
                                                 >
                                                     <FaTrashAlt />
                                                 </button>
@@ -159,5 +156,3 @@ const MyBooks = () => {
 };
 
 export default MyBooks;
-
-

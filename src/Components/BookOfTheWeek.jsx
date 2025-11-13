@@ -31,14 +31,14 @@ const BookOfTheWeek = () => {
   if (loading) return <LoadingSpinner />;
 
   if (!book)
-    return <p className="text-center text-gray-500 mt-10">No featured book found.</p>;
+    return <p className="text-center text-gray-500 dark:text-gray-400 mt-10">No featured book found.</p>;
 
   return (
     <section className="py-10">
       <div>
-        <h1 className="text-4xl text-center font-bold text-blue-600 pb-2">Book Of The Week</h1>
+        <h1 className="text-4xl text-center font-bold text-blue-600 dark:text-blue-400 pb-2">Book Of The Week</h1>
       </div>
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-10 p-6 rounded-xl shadow-lg bg-gray-50">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-10 p-6 rounded-xl shadow-lg bg-white dark:bg-gray-800">
         {/* Book Image */}
         <motion.img
           src={book.coverImage}
@@ -50,14 +50,17 @@ const BookOfTheWeek = () => {
 
         {/* Book Info */}
         <div className="flex-1">
-          <h2 className="text-3xl font-bold text-indigo-600 mb-2">{book.title}</h2>
-          <p className="text-gray-600 text-lg mb-1">by {book.author}</p>
+          <h2 className="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">{book.title}</h2>
+          <p className="text-gray-600 dark:text-gray-300 text-lg mb-1">by {book.author}</p>
           <p className="text-yellow-500 font-semibold mb-3">
             ⭐ {book.rating} / 5
           </p>
-          <p className="text-gray-700 mb-4">{book.summary || "No description available."}</p>
-          <Link to={`/books/${book._id}`}  className="inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
-          View Details
+          <p className="text-gray-700 dark:text-gray-300 mb-4">{book.summary || "No description available."}</p>
+          <Link
+            to={`/books/${book._id}`}
+            className="inline-block bg-indigo-600 text-white dark:bg-indigo-500 dark:hover:bg-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition"
+          >
+            View Details
           </Link>
         </div>
       </div>
@@ -66,3 +69,4 @@ const BookOfTheWeek = () => {
 };
 
 export default BookOfTheWeek;
+

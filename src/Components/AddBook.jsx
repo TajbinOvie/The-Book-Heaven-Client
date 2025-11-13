@@ -2,7 +2,6 @@ import React from "react";
 import Swal from "sweetalert2";
 
 const AddBook = () => {
-
     const handleAddBook = (e) => {
         e.preventDefault();
 
@@ -37,58 +36,58 @@ const AddBook = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4">
-            <div className="w-full max-w-2xl bg-white shadow-lg rounded-2xl p-8">
-                <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">
+        <div className="min-h-screen flex items-center justify-center p-4 bg-base-200 dark:bg-gray-900 text-base-content dark:text-gray-200">
+            <div className="w-full max-w-2xl bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8">
+                <h2 className="text-3xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-6">
                     Add a New Book
                 </h2>
 
                 <form onSubmit={handleAddBook} className="space-y-5">
                     {/* Title */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Title
                         </label>
                         <input
                             type="text"
                             name="title"
                             placeholder="Book Title"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             required
                         />
                     </div>
 
                     {/* Author */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Author
                         </label>
                         <input
                             type="text"
                             name="author"
                             placeholder="Author Name"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             required
                         />
                     </div>
 
                     {/* Genre */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Genre
                         </label>
                         <input
                             name="genre"
                             type="text"
                             placeholder="Genre"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             required
                         />
                     </div>
 
                     {/* Rating */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Rating
                         </label>
                         <input
@@ -98,20 +97,20 @@ const AddBook = () => {
                             max="5"
                             step="0.1"
                             placeholder="Rating (0-5)"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             required
                         />
                     </div>
 
                     {/* Summary */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Summary
                         </label>
                         <textarea
                             name="summary"
                             placeholder="Write a brief summary..."
-                            className="textarea textarea-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="textarea textarea-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             rows={4}
                             required
                         ></textarea>
@@ -119,42 +118,42 @@ const AddBook = () => {
 
                     {/* Cover Image */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Cover Image URL
                         </label>
                         <input
                             type="text"
                             name="coverImage"
                             placeholder="Image URL"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             required
                         />
                     </div>
 
                     {/* User Name */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Your Name
                         </label>
                         <input
                             type="text"
                             name="userName"
                             placeholder="Your Name"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             required
                         />
                     </div>
 
                     {/* User Email */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Your Email
                         </label>
                         <input
                             type="email"
                             name="userEmail"
                             placeholder="Your Email"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             required
                         />
                     </div>
@@ -173,3 +172,4 @@ const AddBook = () => {
 };
 
 export default AddBook;
+

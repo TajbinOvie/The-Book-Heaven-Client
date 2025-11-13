@@ -16,7 +16,7 @@ const BookDetails = () => {
   if (!book) return <LoadingSpinner></LoadingSpinner>;
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-6 min-h-screen">
       {/* Book Header */}
       <div className="flex flex-col md:flex-row gap-6">
         <img

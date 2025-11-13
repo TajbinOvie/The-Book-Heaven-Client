@@ -37,10 +37,13 @@ const HeroBanner = () => {
         backgroundPosition: "center",
       }}
     >
+      {/* Subtle overlay */}
+      <div className="absolute inset-0 bg-black/15 dark:bg-black/20"></div>
+
       <AnimatePresence mode="wait">
         <motion.div
           key={current._id}
-          className="absolute inset-0 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-6"
+          className="absolute inset-0 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-6 z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -48,7 +51,7 @@ const HeroBanner = () => {
         >
           {/* Text Section */}
           <motion.div
-            className="w-full md:w-1/2 z-10"
+            className="w-full md:w-1/2"
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -56,8 +59,8 @@ const HeroBanner = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
               {current.title || "Untitled Book"}
             </h1>
-            <p className="text-gray-200 mt-4 text-base md:text-lg line-clamp-3">
-              {current.description || "A wonderful story waiting to be explored."}
+            <p className="text-gray-100 mt-4 text-base md:text-lg line-clamp-3">
+              {current.summary || "A wonderful story waiting to be explored."}
             </p>
             <div className="flex gap-4 mt-6">
               <button className="bg-indigo-600 text-white px-5 py-2 rounded-lg shadow hover:bg-indigo-700 transition">
@@ -86,18 +89,21 @@ const HeroBanner = () => {
       </AnimatePresence>
 
       {/* Slider dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {books.map((_, i) => (
           <button
             key={i}
             onClick={() => setIndex(i)}
-            className={`w-3 h-3 rounded-full transition-all ${i === index ? "bg-indigo-600 w-6" : "bg-indigo-300"}`}
+            className={`w-3 h-3 rounded-full transition-all ${i === index
+                ? "bg-indigo-600 w-6"
+                : "bg-indigo-300"
+              }`}
           ></button>
         ))}
       </div>
     </div>
+
   );
 };
 
 export default HeroBanner;
-

@@ -39,9 +39,7 @@ const UpdateBook = () => {
 
     try {
       const res = await axios.put(`http://localhost:3000/books/${id}`, formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       if (res.data.modifiedCount > 0 || res.data.success) {
@@ -70,54 +68,54 @@ const UpdateBook = () => {
 
   if (loading) return <LoadingSpinner />;
   if (!formData)
-    return <p className="text-center text-gray-500 mt-10">Book not found.</p>;
+    return <p className="text-center text-gray-500 dark:text-gray-300 mt-10">Book not found.</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-xl mt-10 min-h-screen">
-      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
+    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 shadow-md rounded-xl mt-10 min-h-screen">
+      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 dark:text-blue-400">
         Update Book
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title */}
         <div>
-          <label className="block font-medium mb-1">Title</label>
+          <label className="block font-medium mb-1 text-gray-700 dark:text-gray-300">Title</label>
           <input
             type="text"
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:ring focus:ring-blue-300"
+            className="w-full border border-gray-300 dark:border-gray-600 p-2 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:ring focus:ring-blue-300"
           />
         </div>
 
         {/* Author */}
         <div>
-          <label className="block font-medium mb-1">Author</label>
+          <label className="block font-medium mb-1 text-gray-700 dark:text-gray-300">Author</label>
           <input
             type="text"
             name="author"
             value={formData.author}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:ring focus:ring-blue-300"
+            className="w-full border border-gray-300 dark:border-gray-600 p-2 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:ring focus:ring-blue-300"
           />
         </div>
 
         {/* Genre */}
         <div>
-          <label className="block font-medium mb-1">Genre</label>
+          <label className="block font-medium mb-1 text-gray-700 dark:text-gray-300">Genre</label>
           <input
             type="text"
             name="genre"
             value={formData.genre}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:ring focus:ring-blue-300"
+            className="w-full border border-gray-300 dark:border-gray-600 p-2 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:ring focus:ring-blue-300"
           />
         </div>
 
         {/* Rating */}
         <div>
-          <label className="block font-medium mb-1">Rating</label>
+          <label className="block font-medium mb-1 text-gray-700 dark:text-gray-300">Rating</label>
           <input
             type="number"
             name="rating"
@@ -126,19 +124,19 @@ const UpdateBook = () => {
             max="5"
             step="0.1"
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:ring focus:ring-blue-300"
+            className="w-full border border-gray-300 dark:border-gray-600 p-2 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:ring focus:ring-blue-300"
           />
         </div>
 
         {/* Cover Image */}
         <div>
-          <label className="block font-medium mb-1">Cover Image URL</label>
+          <label className="block font-medium mb-1 text-gray-700 dark:text-gray-300">Cover Image URL</label>
           <input
             type="text"
             name="coverImage"
             value={formData.coverImage}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:ring focus:ring-blue-300"
+            className="w-full border border-gray-300 dark:border-gray-600 p-2 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:ring focus:ring-blue-300"
           />
           {formData.coverImage && (
             <img
@@ -151,13 +149,13 @@ const UpdateBook = () => {
 
         {/* Summary */}
         <div>
-          <label className="block font-medium mb-1">Summary</label>
+          <label className="block font-medium mb-1 text-gray-700 dark:text-gray-300">Summary</label>
           <textarea
             name="summary"
             value={formData.summary}
             rows="4"
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:ring focus:ring-blue-300"
+            className="w-full border border-gray-300 dark:border-gray-600 p-2 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:ring focus:ring-blue-300"
           ></textarea>
         </div>
 
@@ -173,6 +171,7 @@ const UpdateBook = () => {
 };
 
 export default UpdateBook;
+
 
 
 
