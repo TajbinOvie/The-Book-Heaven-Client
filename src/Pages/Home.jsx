@@ -5,6 +5,7 @@ import axios from 'axios';
 import LoadingSpinner from '../Components/LoadingSpinner';
 import TopGenre from '../Components/TopGenre';
 import BookOfTheWeek from '../Components/BookOfTheWeek';
+import TopRatedBooks from '../Components/TopRatedThree';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -40,6 +41,7 @@ const Home = () => {
       <LatestBooks latestBooks={latestBooks} />
       <TopGenre></TopGenre>
       <BookOfTheWeek></BookOfTheWeek>
+      <TopRatedBooks></TopRatedBooks>
     </div>
   );
 };
