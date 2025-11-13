@@ -2,7 +2,7 @@
 
 **The Book Heaven** is a modern web application designed for book lovers to explore, manage, and discover books. The site features a clean and responsive interface, animations, and user-friendly functionalities.
 
-**Live Site:** 
+**Live Site:** https://assignment-10-the-book-heaven.netlify.app/
 
 ---
 
