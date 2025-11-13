@@ -17,6 +17,7 @@ import BookDetails from './Components/BookDetails.jsx';
 import MyBooks from './Components/MyBooks.jsx';
 import UpdateBook from './Components/UpdateBook.jsx';
 import ErrorPage from './Components/ErrorPage.jsx';
+import PrivateRoute from './Provider/PrivateRoute.jsx';
 
 
 
@@ -43,28 +44,40 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile></Profile>
+        element: <PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>
       },
       {
         path: "/update-profile",
-        element: <UpdateProfile></UpdateProfile>
+        element: <PrivateRoute>
+          <UpdateProfile></UpdateProfile>
+        </PrivateRoute>
       },
       {
         path: "/add-book",
-        element: <AddBook></AddBook>
+        element: <PrivateRoute>
+          <AddBook></AddBook>
+        </PrivateRoute>
       },
       {
         path: "/books/:id",
-        element: <BookDetails></BookDetails>,
+        element: <PrivateRoute>
+          <BookDetails></BookDetails>
+        </PrivateRoute>,
       },
       {
         path: "/update-book/:id",
-        element: <UpdateBook></UpdateBook>,
+        element: <PrivateRoute>
+          <UpdateBook></UpdateBook>
+        </PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:3000/books/${params.id}`)
       },
       {
         path: "/my-books",
-        element: <MyBooks></MyBooks>,
+        element: <PrivateRoute>
+          <MyBooks></MyBooks>
+        </PrivateRoute>,
       },
       {
         path: "/*",

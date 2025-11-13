@@ -34,11 +34,11 @@ const BookCard = ({ book }) => {
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
           ))}
-          <span className="text-sm text-gray-600 ml-1">(4.9)</span>
+          <span className="text-sm text-gray-600 ml-1">{book.rating}</span>
         </div>
 
         <p className="text-gray-700 text-sm mt-3 line-clamp-2">
-          {book?.description ||
+          {book?.summary ||
             "No description available for this book at the moment."}
         </p>
 

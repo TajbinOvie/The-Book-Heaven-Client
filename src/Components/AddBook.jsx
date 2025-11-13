@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Swal from "sweetalert2";
 
 const AddBook = () => {
-    // const [showPreview, setShowPreview] = useState(false);
 
     const handleAddBook = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         const formData = {
             title: e.target.title.value,
@@ -14,26 +13,28 @@ const AddBook = () => {
             rating: e.target.rating.value,
             summary: e.target.summary.value,
             coverImage: e.target.coverImage.value,
-            userEmail: e.target.userEmail.value
-        }
+            userEmail: e.target.userEmail.value,
+            userName: e.target.userName.value,
+        };
 
         fetch('http://localhost:3000/books', {
             method: 'POST',
             headers: {
-                "content-type" : "application/json"
+                "content-type": "application/json"
             },
             body: JSON.stringify(formData)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            Swal.fire("Successfully logged in!");
-        })
-        .catch(err => {
-            console.log(err)
-            Swal.fire(e.message);
-        })
-    }
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                Swal.fire("✅ Book added successfully!");
+                e.target.reset();
+            })
+            .catch(err => {
+                console.error(err);
+                Swal.fire("❌ Something went wrong!");
+            });
+    };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-4">
@@ -125,6 +126,20 @@ const AddBook = () => {
                             type="text"
                             name="coverImage"
                             placeholder="Image URL"
+                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            required
+                        />
+                    </div>
+
+                    {/* User Name */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Your Name
+                        </label>
+                        <input
+                            type="text"
+                            name="userName"
+                            placeholder="Your Name"
                             className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             required
                         />

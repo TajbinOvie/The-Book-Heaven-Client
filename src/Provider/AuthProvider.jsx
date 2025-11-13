@@ -6,6 +6,7 @@ import { auth } from '../Firebase/Firebase.config';
 const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
+    
 
     // for google signin
     const provider = new GoogleAuthProvider();

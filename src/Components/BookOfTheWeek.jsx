@@ -34,6 +34,9 @@ const BookOfTheWeek = () => {
 
   return (
     <section className="py-10 bg-white">
+      <div>
+        <h1 className="text-4xl text-center font-bold text-blue-600 pb-2">Book Of The Week</h1>
+      </div>
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-10 p-6 rounded-xl shadow-lg bg-gray-50">
         {/* Book Image */}
         <motion.img
