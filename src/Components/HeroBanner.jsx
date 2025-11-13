@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import sliderBg from "../assets/bg-image.png"; // import your image
+import { Link } from "react-router";
 
 const HeroBanner = () => {
   const [books, setBooks] = useState([]);
@@ -63,12 +64,12 @@ const HeroBanner = () => {
               {current.summary || "A wonderful story waiting to be explored."}
             </p>
             <div className="flex gap-4 mt-6">
-              <button className="bg-indigo-600 text-white px-5 py-2 rounded-lg shadow hover:bg-indigo-700 transition">
+              <Link to={"/books"} className="bg-indigo-600 text-white px-5 py-2 rounded-lg shadow hover:bg-indigo-700 transition">
                 All Books
-              </button>
-              <button className="border border-white text-white px-5 py-2 rounded-lg hover:bg-white hover:text-indigo-700 transition">
+              </Link>
+              <Link to={"/add-book"}  className="border border-white text-white px-5 py-2 rounded-lg hover:bg-white hover:text-indigo-700 transition">
                 Create Book
-              </button>
+              </Link>
             </div>
           </motion.div>
 
