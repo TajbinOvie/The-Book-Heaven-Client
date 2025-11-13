@@ -20,18 +20,66 @@ const Navbar = () => {
 
     const navLinks = (
         <>
-            <li>
-                <NavLink className="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-600 hover:text-white transition block" to="/">Home</NavLink>
-            </li>
-            <li>
-                <NavLink className="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-600 hover:text-white transition block" to="/books">All Books</NavLink>
-            </li>
-            <li>
-                <NavLink className="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-600 hover:text-white transition block" to="/add-book">Add Books</NavLink>
-            </li>
-            <li>
-                <NavLink className="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-600 hover:text-white transition block" to="/my-books">My Books</NavLink>
-            </li>
+<li>
+  <NavLink
+    to="/"
+    className={({ isActive }) =>
+      `px-3 py-2 rounded-md text-sm font-medium transition block ${
+        isActive
+          ? "underline underline-offset-4 decoration-white"
+          : "hover:bg-indigo-600 hover:text-white"
+      }`
+    }
+  >
+    Home
+  </NavLink>
+</li>
+
+<li>
+  <NavLink
+    to="/books"
+    className={({ isActive }) =>
+      `px-3 py-2 rounded-md text-sm font-medium transition block ${
+        isActive
+          ? "underline underline-offset-4 decoration-white"
+          : "hover:bg-indigo-600 hover:text-white"
+      }`
+    }
+  >
+    All Books
+  </NavLink>
+</li>
+
+<li>
+  <NavLink
+    to="/add-book"
+    className={({ isActive }) =>
+      `px-3 py-2 rounded-md text-sm font-medium transition block ${
+        isActive
+          ? "underline underline-offset-4 decoration-white"
+          : "hover:bg-indigo-600 hover:text-white"
+      }`
+    }
+  >
+    Add Books
+  </NavLink>
+</li>
+
+<li>
+  <NavLink
+    to="/my-books"
+    className={({ isActive }) =>
+      `px-3 py-2 rounded-md text-sm font-medium transition block ${
+        isActive
+          ? "underline underline-offset-4 decoration-white"
+          : "hover:bg-indigo-600 hover:text-white"
+      }`
+    }
+  >
+    My Books
+  </NavLink>
+</li>
+
         </>
     );
 
