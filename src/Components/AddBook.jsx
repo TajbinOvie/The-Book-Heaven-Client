@@ -41,6 +41,7 @@ const AddBook = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center p-4 bg-base-200 dark:bg-gray-900 text-base-content dark:text-gray-200">
+            <title>Add book</title>
             <div className="w-full max-w-2xl bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8">
                 <h2 className="text-3xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-6">
                     Add a New Book

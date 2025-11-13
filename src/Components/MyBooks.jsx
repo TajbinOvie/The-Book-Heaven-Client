@@ -61,6 +61,7 @@ const MyBooks = () => {
 
   return (
     <div className="min-h-screen py-10 px-4 md:px-6 bg-base-200 dark:bg-gray-900 text-base-content dark:text-gray-200">
+      <title>My Books</title>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-10">
           My Books

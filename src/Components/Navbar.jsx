@@ -110,7 +110,7 @@ const Navbar = () => {
                     {/* Logo + Desktop menu */}
                     <div className="flex items-center">
                         <div className="flex-shrink-0 text-xl font-bold">
-                            <NavLink to="/">Book Heaven</NavLink>
+                            <NavLink to="/">The Book Heaven</NavLink>
                         </div>
                         <div className="hidden lg:flex lg:ml-10">
                             <ul className="flex space-x-4">{navLinks}</ul>

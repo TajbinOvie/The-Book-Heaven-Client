@@ -12,7 +12,7 @@ const Footer = () => {
 
                 {/* Logo & Description */}
                 <div>
-                    <h2 className="text-2xl font-bold mb-2">Book Heaven</h2>
+                    <h2 className="text-2xl font-bold mb-2">The Book Heaven</h2>
                     <p className="text-indigo-200">
                         Explore, discover, and share your favorite books. Your ultimate library experience online.
                     </p>
@@ -72,7 +72,7 @@ const Footer = () => {
             </div>
 
             <div className="mt-10 text-center text-sm text-indigo-200">
-                © {currentYear} Book Heaven. All rights reserved.
+                © {currentYear} The Book Heaven. All rights reserved.
             </div>
         </footer>
     );

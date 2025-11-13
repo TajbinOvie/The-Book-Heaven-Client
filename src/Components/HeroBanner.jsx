@@ -38,6 +38,7 @@ const HeroBanner = () => {
         backgroundPosition: "center",
       }}
     >
+      <title>The Book Heaven</title>
 
       <div className="absolute inset-0 bg-black/15 dark:bg-black/20"></div>
 

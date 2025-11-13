@@ -72,6 +72,7 @@ const UpdateBook = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 shadow-md rounded-xl mt-10 min-h-screen">
+      <title>Update Book</title>
       <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 dark:text-blue-400">
         Update Book
       </h2>
