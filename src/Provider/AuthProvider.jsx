@@ -11,7 +11,7 @@ import { auth } from '../Firebase/Firebase.config';
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true); // track auth loading
+    const [loading, setLoading] = useState(true); 
 
     const provider = new GoogleAuthProvider();
 
@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            setLoading(false); // set loading to false after auth state determined
+            setLoading(false); 
         });
 
         return () => unsubscribe();

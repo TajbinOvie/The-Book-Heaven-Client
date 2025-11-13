@@ -4,7 +4,7 @@ const TopGenre = () => {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/top-genres") // your API endpoint
+    fetch("http://localhost:3000/top-genres") 
       .then(res => res.json())
       .then(data => setGenres(data))
       .catch(err => console.error(err));
@@ -25,7 +25,7 @@ const TopGenre = () => {
               className="flex items-center gap-2 bg-white dark:bg-gray-700 rounded-xl shadow-md dark:shadow-gray-700 p-2 flex-shrink-0 cursor-pointer transition-transform duration-300 hover:scale-105"
             >
               <img
-                src={genre.coverImage || "/placeholder.jpg"} // fallback
+                src={genre.coverImage || "/placeholder.jpg"} 
                 alt={genre.genre}
                 className="w-16 h-16 object-cover rounded-md"
               />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6'; // <-- new X (Twitter) icon
+import { FaXTwitter } from 'react-icons/fa6'; 
 
 const Footer = () => {
     const currentYear = format(new Date(), 'yyyy');
@@ -57,7 +57,7 @@ const Footer = () => {
                             rel="noopener noreferrer"
                             className="hover:text-indigo-200 transition"
                         >
-                            <FaXTwitter size={20} /> {/* X logo */}
+                            <FaXTwitter size={20} /> 
                         </a>
                         <a
                             href="https://instagram.com"

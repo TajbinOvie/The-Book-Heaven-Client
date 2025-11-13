@@ -77,13 +77,19 @@ const Profile = () => {
                         </div>
                     </div>
 
-                    {/* Edit Profile / Logout Buttons */}
+                   
                     <div className="mt-6 flex flex-col gap-3">
-                        <Link
+                        {/* <Link
                             to="/update-profile"
                             className="btn btn-outline btn-block text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-700"
                         >
                             Edit Profile
+                        </Link> */}
+                        <Link
+                            to="/"
+                            className="btn btn-outline btn-block text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-700"
+                        >
+                            Homepage
                         </Link>
                         <button
                             onClick={handleLogout}

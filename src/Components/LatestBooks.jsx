@@ -31,7 +31,6 @@ const LatestBooks = ({ latestBooks }) => {
                             ))}
                         </div>
 
-                        {/* Show All Books Button */}
                         <div className="flex justify-center mt-10">
                             <Link
                                 to="/books"

@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading) {
-    // Show a spinner or blank screen while checking auth
+    
     return <LoadingSpinner></LoadingSpinner>
   }
 

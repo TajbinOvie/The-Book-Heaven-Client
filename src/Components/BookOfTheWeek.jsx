@@ -14,10 +14,9 @@ const BookOfTheWeek = () => {
         const res = await axios.get("http://localhost:3000/books");
         const books = res.data;
 
-        // Pick the first book with rating >= 4.9
         const featuredBook = books.find((b) => b.rating >= 4.9);
 
-        setBook(featuredBook || books[0]); // fallback to first book if none found
+        setBook(featuredBook || books[0]); 
       } catch (err) {
         console.error("Error fetching books:", err);
       } finally {

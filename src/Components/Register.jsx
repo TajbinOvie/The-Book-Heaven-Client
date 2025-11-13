@@ -30,7 +30,7 @@ const Register = () => {
         createUserWithEmailAndPasswordFunction(email, password)
             .then(async (res) => {
                 const user = res.user;
-                // Update displayName and photoURL
+                
                 await updateProfile(user, {
                     displayName: name,
                     photoURL: photoURL,
@@ -38,7 +38,7 @@ const Register = () => {
 
                 setUser({ ...user, displayName: name, photoURL: photoURL });
                 Swal.fire("Registration successful!");
-                navigate("/", { replace: true }); // Navigate to homepage
+                navigate("/", { replace: true }); 
             })
             .catch((e) => {
                 Swal.fire(e.message);
@@ -50,7 +50,7 @@ const Register = () => {
             .then((res) => {
                 setUser(res.user);
                 Swal.fire("Successfully registered with Google!");
-                navigate("/", { replace: true }); // Navigate to homepage
+                navigate("/", { replace: true }); 
             })
             .catch((e) => {
                 Swal.fire(e.message);

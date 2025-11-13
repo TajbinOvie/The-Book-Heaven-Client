@@ -31,7 +31,7 @@ const AddBook = () => {
                 console.log(data);
                 Swal.fire("✅ Book added successfully!");
                 e.target.reset();
-                navigate("/my-books"); // Navigate to My Books page
+                navigate("/my-books"); 
             })
             .catch(err => {
                 console.error(err);

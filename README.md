@@ -53,17 +53,17 @@ Start the development server:
 
 Copy code
 npm start
-Folder Structure (Client Side)
 
-Copy code
-src/
-│
-├─ components/      # Reusable components (BookCard, LoadingSpinner, etc.)
-├─ pages/           # Page components (AllBooks, MyBooks, BookOfTheWeek, Register, etc.)
-├─ Provider/        # Context providers (AuthContext)
-├─ Firebase/        # Firebase config and utilities
-├─ App.jsx          # Main application component
-└─ index.jsx        # Entry point
+## Folder Structure (Client Side)
+
+- **src/**
+  - **components/** – Reusable components like BookCard, LoadingSpinner, etc.
+  - **pages/** – Page components like AllBooks, MyBooks, BookOfTheWeek, Register, etc.
+  - **Provider/** – Context providers such as AuthContext
+  - **Firebase/** – Firebase configuration and utilities
+  - **App.jsx** – Main application component
+  - **index.jsx** – Entry point of the application
+
 
 Future Improvements
 Add book search and filter functionalities.

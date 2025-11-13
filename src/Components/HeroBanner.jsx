@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import sliderBg from "../assets/bg-image.png"; // import your image
+import sliderBg from "../assets/bg-image.png"; 
 import { Link } from "react-router";
 
 const HeroBanner = () => {
@@ -22,7 +22,7 @@ const HeroBanner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex(prev => (prev + 1) % 3);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -38,7 +38,7 @@ const HeroBanner = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* Subtle overlay */}
+
       <div className="absolute inset-0 bg-black/15 dark:bg-black/20"></div>
 
       <AnimatePresence mode="wait">
