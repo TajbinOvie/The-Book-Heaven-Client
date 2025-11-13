@@ -5,13 +5,10 @@ import { Link } from 'react-router';
 import { auth } from '../Firebase/Firebase.config';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Provider/AuthContext';
-
-
+import { getYear } from 'date-fns';
 
 const Login = () => {
-
-    const {logInUserWithEmailAndPasswordFunction, provider, setUser} = useContext(AuthContext);
-
+    const { logInUserWithEmailAndPasswordFunction, provider, setUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = (e) => {
@@ -19,74 +16,71 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        console.log({ email, password });
-        
         logInUserWithEmailAndPasswordFunction(email, password)
             .then(res => {
-                console.log(res)
                 setUser(res.user);
                 Swal.fire("Successfully logged in!");
             }).catch(e => {
-                console.log(e)
                 Swal.fire(e.message);
-            })
+            });
     };
 
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, provider)
-             .then(res => {
-                console.log(res)
+            .then(res => {
                 setUser(res.user);
                 Swal.fire("Successfully logged in!");
             }).catch(e => {
-                console.log(e)
                 Swal.fire(e.message);
-            })
-    }
+            });
+    };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-            <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
-                <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
+            <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8">
+                <h2 className="text-3xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-6">
                     Welcome Back
                 </h2>
 
                 <form onSubmit={handleLogin} className="space-y-5">
                     {/* Email */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Email
                         </label>
                         <input
                             type="email"
                             name="email"
                             placeholder="you@example.com"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             required
                         />
                     </div>
 
                     {/* Password */}
                     <div className='relative'>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Password
                         </label>
                         <input
                             type={showPassword ? "text" : "password"}
                             name="password"
                             placeholder="••••••••"
-                            className="input input-bordered w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className="input input-bordered w-full rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             required
                         />
                         <div className="text-right mt-1">
                             <Link
                                 to="/forgot-password"
-                                className="text-sm text-indigo-600 hover:underline font-medium"
+                                className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
                             >
                                 Forgot password?
                             </Link>
                         </div>
-                        <span onClick={() => setShowPassword(!showPassword)} className='absolute right-2 top-[30px] cursor-pointer z-50'>
+                        <span
+                            onClick={() => setShowPassword(!showPassword)}
+                            className='absolute right-2 top-[30px] cursor-pointer z-50 text-gray-600 dark:text-gray-300'
+                        >
                             {showPassword ? <Eye /> : <EyeClosed />}
                         </span>
                     </div>
@@ -103,7 +97,7 @@ const Login = () => {
                     <button
                         onClick={handleGoogleSignIn}
                         type="button"
-                        className="w-full btn btn-outline mt-2 flex items-center justify-center space-x-2 cursor-pointer"
+                        className="w-full btn btn-outline mt-2 flex items-center justify-center space-x-2 cursor-pointer text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600"
                     >
                         <img
                             src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
@@ -114,15 +108,15 @@ const Login = () => {
                     </button>
                 </form>
 
-                <p className="text-sm text-center text-gray-600 mt-5">
+                <p className="text-sm text-center text-gray-600 dark:text-gray-400 mt-5">
                     Don’t have an account?{' '}
-                    <Link to="/register" className="text-indigo-600 font-medium hover:underline">
+                    <Link to="/register" className="text-indigo-600 dark:text-indigo-400 font-medium hover:underline">
                         Register
                     </Link>
                 </p>
 
-                <p className="text-xs text-center text-gray-400 mt-6">
-                    © {new Date().getFullYear()} Book Heaven. All rights reserved.
+                <p className="text-xs text-center text-gray-400 dark:text-gray-500 mt-6">
+                    © {getYear(new Date())} Book Heaven. All rights reserved.
                 </p>
             </div>
         </div>
@@ -130,4 +124,3 @@ const Login = () => {
 };
 
 export default Login;
-

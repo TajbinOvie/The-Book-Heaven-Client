@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
 import { AuthContext } from '../Provider/AuthContext';
 import Swal from 'sweetalert2';
@@ -6,6 +6,14 @@ import Swal from 'sweetalert2';
 const Navbar = () => {
   const { user, signOutUserFunction } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+
+  useEffect(() => {
+    const html = document.querySelector('html')
+    html.setAttribute("data-theme", theme)
+    localStorage.setItem("theme", theme)
+  }, [theme])
 
   const navLinks = (
     <>
@@ -43,8 +51,7 @@ const Navbar = () => {
   };
 
   const handleTheme = (checked) => {
-    const html = document.querySelector('html');
-    html.setAttribute('data-theme', checked ? 'dark' : 'light');
+    setTheme(checked? "dark" : "light")
   };
 
   return (
