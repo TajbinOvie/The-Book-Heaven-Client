@@ -13,13 +13,14 @@ const BookCard = ({ book }) => {
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       {/* Book Cover */}
-      <div className="relative h-3/4">
-        <img
-          src={book?.coverImage || 'https://via.placeholder.com/300x400?text=No+Image'}
-          alt={book?.title || 'Book Cover'}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
+      <div className="relative h-72 w-full overflow-hidden rounded-t-md">
+  <img
+    src={book?.coverImage || 'https://via.placeholder.com/300x400?text=No+Image'}
+    alt={book?.title || 'Book Cover'}
+    className="w-full h-full object-contain" // object-contain ensures full image is visible
+  />
+</div>
+
 
       {/* White Overlay (slides up on hover) */}
       <div className="absolute inset-x-0 bottom-0 bg-white dark:bg-gray-800 translate-y-[30%] group-hover:translate-y-0 transition-transform duration-500 p-4 flex flex-col justify-between">
