@@ -37,7 +37,7 @@ const Profile = () => {
     }
 
     return (
-        <div className="md:p-30 lg:p-50 bg-gradient-to-br from-blue-50 to-indigo-100 flex justify-center p-4">
+        <div className="md:p-30 lg:p-50  flex justify-center p-4">
             <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
                 <div className="flex flex-col items-center">
                     {/* User Avatar */}

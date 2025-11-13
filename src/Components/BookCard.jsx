@@ -6,7 +6,7 @@ import { Link } from "react-router";
 const BookCard = ({ book }) => {
   return (
     <motion.div
-      className="bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
+      className=" shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
       initial={{ opacity: 0, y: 80 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

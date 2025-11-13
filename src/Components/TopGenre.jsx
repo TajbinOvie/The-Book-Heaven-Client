@@ -10,7 +10,7 @@ const genres = [
 
 const TopGenre = () => {
     return (
-        <section className="py-10 bg-gray-50">
+        <section className="py-10">
             <h2 className="text-4xl font-bold text-indigo-600 text-center mb-8">
                 Top Genres
             </h2>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingSpinner from "./LoadingSpinner";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const BookOfTheWeek = () => {
   const [book, setBook] = useState(null);
@@ -33,7 +34,7 @@ const BookOfTheWeek = () => {
     return <p className="text-center text-gray-500 mt-10">No featured book found.</p>;
 
   return (
-    <section className="py-10 bg-white">
+    <section className="py-10">
       <div>
         <h1 className="text-4xl text-center font-bold text-blue-600 pb-2">Book Of The Week</h1>
       </div>
@@ -55,12 +56,9 @@ const BookOfTheWeek = () => {
             ⭐ {book.rating} / 5
           </p>
           <p className="text-gray-700 mb-4">{book.summary || "No description available."}</p>
-          <a
-            href={`/books/${book._id}`}
-            className="inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition"
-          >
-            Read More
-          </a>
+          <Link to={`/books/${book._id}`}  className="inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
+          View Details
+          </Link>
         </div>
       </div>
     </section>

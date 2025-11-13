@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
-import { FaStar, FaTrashAlt, FaBook, FaEdit } from "react-icons/fa";
+import { FaStar, FaTrashAlt, FaEdit, FaBook } from "react-icons/fa";
 import LoadingSpinner from "./LoadingSpinner";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
@@ -12,9 +12,9 @@ const MyBooks = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchBooks = async () => {
-            if (!user?.email) return;
+        if (!user?.email) return;
 
+        const fetchBooks = async () => {
             try {
                 const res = await axios.get(`http://localhost:3000/books?email=${user.email}`);
                 setBooks(res.data.result || res.data);
@@ -41,19 +41,15 @@ const MyBooks = () => {
 
         if (result.isConfirmed) {
             try {
-                const response = await axios.delete(`http://localhost:3000/books/${id}`);
+                await axios.delete(`http://localhost:3000/books/${id}`);
                 setBooks((prev) => prev.filter((book) => book._id !== id));
 
-                await Swal.fire({
+                Swal.fire({
                     title: "Deleted!",
                     text: "The book has been deleted successfully.",
                     icon: "success",
                 });
-
-                console.log("Delete response:", response.data);
             } catch (error) {
-                console.error("Error deleting book:", error);
-
                 Swal.fire({
                     icon: "error",
                     title: "Delete failed",
@@ -66,88 +62,102 @@ const MyBooks = () => {
         }
     };
 
-    if (loading) {
-        return <LoadingSpinner />;
-    }
+    if (loading) return <LoadingSpinner />;
 
     return (
-        <div className="max-w-6xl mx-auto p-6 min-h-screen">
-            <h1 className="text-3xl font-bold mb-6 flex items-center gap-2">
-                <FaBook className="text-blue-500" /> My Books
-            </h1>
+        <div className="min-h-screen  py-10 px-6">
+            <div className="max-w-7xl mx-auto">
+                <h2 className="text-4xl font-bold text-center text-indigo-600 mb-10 flex items-center justify-center gap-2">
+                    <FaBook className="text-blue-500" /> My Books
+                </h2>
 
-            {books.length === 0 ? (
-                <p className="text-center text-gray-500 mt-10">
-                    You haven’t added any books yet.
-                </p>
-            ) : (
-                <div className="overflow-x-auto bg-white rounded-xl shadow-md">
-                    <table className="min-w-full border border-gray-200">
-                        <thead className="bg-gray-100 text-gray-700">
-                            <tr>
-                                <th className="px-4 py-2 text-left">Cover</th>
-                                <th className="px-4 py-2 text-left">Title</th>
-                                <th className="px-4 py-2 text-left">Author</th>
-                                <th className="px-4 py-2 text-left">Genre</th>
-                                <th className="px-4 py-2 text-left">Rating</th>
-                                <th className="px-4 py-2 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {books.map((book) => (
-                                <tr
-                                    key={book._id}
-                                    className="border-t hover:bg-gray-50 transition-colors"
-                                >
-                                    <td className="px-4 py-3">
-                                        <img
-                                            src={book.coverImage}
-                                            alt={book.title}
-                                            className="w-16 h-20 object-cover rounded-md"
-                                        />
-                                    </td>
-                                    <td className="px-4 py-3 font-medium text-gray-800">
-                                        {book.title}
-                                    </td>
-                                    <td className="px-4 py-3 text-gray-600">{book.author}</td>
-                                    <td className="px-4 py-3 text-gray-600">{book.genre}</td>
-                                    <td className="px-4 py-3 text-yellow-500 flex items-center gap-1">
-                                        <FaStar /> {book.rating || "N/A"}
-                                    </td>
-                                    <td className="px-4 py-3 text-center">
-                                        <div className="flex items-center justify-center gap-3">
-                                            <Link
-                                                to={`/books/${book._id}`}
-                                                className="text-blue-600 hover:text-blue-800"
-                                                title="View Details"
-                                            >
-                                                View Details
-                                            </Link>
-                                            <Link
-                                                to={`/update-book/${book._id}`}
-                                                className="text-green-600 hover:text-green-800"
-                                                title="Edit"
-                                            >
-                                                <span>Edit</span><FaEdit />
-                                            </Link>
-                                            <button
-                                                onClick={() => handleDelete(book._id)}
-                                                className="text-red-500 hover:text-red-700"
-                                                title="Delete"
-                                            >
-                                                <FaTrashAlt />
-                                            </button>
-                                        </div>
-                                    </td>
+                {books.length === 0 ? (
+                    <div className="text-center text-gray-500 mt-20">
+                        <p>You haven’t added any books yet.</p>
+                    </div>
+                ) : (
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full bg-white rounded-lg shadow-md border border-gray-200">
+                            <thead className="bg-indigo-100 text-left">
+                                <tr>
+                                    <th className="px-4 py-3 border-b">#</th>
+                                    <th className="px-4 py-3 border-b">Cover</th>
+                                    <th className="px-4 py-3 border-b">Title</th>
+                                    <th className="px-4 py-3 border-b">Author</th>
+                                    <th className="px-4 py-3 border-b">Genre</th>
+                                    <th className="px-4 py-3 border-b">Rating</th>
+                                    <th className="px-4 py-3 border-b text-center">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                            </thead>
+
+                            <tbody>
+                                {books.map((book, index) => (
+                                    <tr
+                                        key={book._id}
+                                        className="hover:bg-gray-50 transition border-b last:border-none"
+                                    >
+                                        <td className="px-4 py-3">{index + 1}</td>
+
+                                        <td className="px-4 py-3">
+                                            <img
+                                                src={
+                                                    book.coverImage ||
+                                                    "https://via.placeholder.com/60x90?text=No+Image"
+                                                }
+                                                alt={book.title}
+                                                className="w-12 h-16 object-cover rounded"
+                                            />
+                                        </td>
+
+                                        <td className="px-4 py-3 font-medium text-gray-800 truncate max-w-[200px]">
+                                            {book.title}
+                                        </td>
+
+                                        <td className="px-4 py-3 text-gray-600">{book.author}</td>
+                                        <td className="px-4 py-3 text-gray-600">{book.genre}</td>
+
+                                        <td className="px-4 py-3 text-gray-600">
+                                            <span className="inline-flex items-center gap-1">
+                                                <FaStar className="text-yellow-400" />
+                                                <span>{book.rating || "N/A"}</span>
+                                            </span>
+                                        </td>
+
+                                        <td className="px-4 py-3 text-center">
+                                            <div className="flex items-center justify-center gap-4">
+                                                <Link
+                                                    to={`/books/${book._id}`}
+                                                    className="text-blue-600 hover:text-blue-800 font-medium"
+                                                >
+                                                    View
+                                                </Link>
+
+                                                <Link
+                                                    to={`/update-book/${book._id}`}
+                                                    className="flex items-center gap-1 text-green-600 hover:text-green-800"
+                                                >
+                                                    <FaEdit /> Update
+                                                </Link>
+
+                                                <button
+                                                    onClick={() => handleDelete(book._id)}
+                                                    className="text-red-500 hover:text-red-700"
+                                                >
+                                                    <FaTrashAlt />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
 
 export default MyBooks;
+
 
