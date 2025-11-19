@@ -78,5 +78,39 @@ License
 This project is open-source and available under the MIT License.
 
 Author
+Tajbin Ovie
 
-Your Name – Tajbin Ovie
+🚀 Run This Project on Your Local Machine
+
+Follow the steps below to set up The Book Heaven locally.
+
+1. Clone the Repository
+git clone https://github.com/TANVIRANZUM/the-book-heaven.git
+
+2. Navigate to the Project Folder
+cd the-book-heaven
+
+3. Install Dependencies
+npm install
+
+4. Create a .env File
+
+Create a .env file in the root folder and add the required Firebase & server environment variables (example):
+
+VITE_apiKey=your_api_key
+VITE_authDomain=your_auth_domain
+VITE_projectId=your_project_id
+VITE_storageBucket=your_storage_bucket
+VITE_messagingSenderId=your_msg_sender_id
+VITE_appId=your_app_id
+VITE_server_url=http://localhost:3000
+
+
+Make sure your backend server is also running locally.
+
+5. Start the Development Server
+npm run dev
+
+Your project will run at:
+
+http://localhost:5173
